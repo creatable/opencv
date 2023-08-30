@@ -11,12 +11,14 @@ jobs:
     resource_class: medium
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
+      OPENCV_SKIP_XCODEBUILD_FORCE_TRYCOMPILE_DEBUG: 1
     steps:
       - checkout
       - run: brew install cmake ccache zlib
       - run:
           command: |
             python3 platforms/apple/build_xcframework.py \
+            --iphonesimulator_archs arm64,x86_64 \
             --iphoneos_archs arm64 \
             --without dnn \
             --without ml \
